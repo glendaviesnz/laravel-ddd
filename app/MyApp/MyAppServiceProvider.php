@@ -5,7 +5,6 @@ namespace MyApp;
 use Illuminate\Support\ServiceProvider;
 use Doctrine\ORM\Tools\Setup;
 
-
 class MyAppServiceProvider extends ServiceProvider {
 
     public function boot()
@@ -23,11 +22,16 @@ class MyAppServiceProvider extends ServiceProvider {
 
         \App::singleton('Doctrine\ORM\EntityManager', function() {
             $isDevMode = true;
-            $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode);
 
+            $paths = array(__DIR__.'/Infrastructure/Repository/Metadata');
+            $config = Setup::createXMLMetadataConfiguration($paths, $isDevMode);
             $conn = array(
-                'driver' => 'pdo_sqlite',
-                'path' => __DIR__ . '/db.sqlite',
+                'driver' => 'pdo_mysql',
+                'host' => 'localhost',
+                'dbname' => 'laravelddd',
+                'user' => 'root',
+                'password' => 'root',
+                
             );
 
             return \Doctrine\ORM\EntityManager::create($conn, $config);
