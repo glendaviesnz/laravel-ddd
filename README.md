@@ -1,6 +1,6 @@
 ## Laravel DDD Sandbox
 
-A sandbox project for playing with Domain Driven Design concepts in a Laravel 4 based app. This is indented for theoretically purposes only and is not intended to be production level code at this point.
+A sandbox project for playing with Domain Driven Design concepts in a Laravel 4 based app. This is intended for theoretically purposes only and is not intended to be production level code at this point.
 
 ### License
 
