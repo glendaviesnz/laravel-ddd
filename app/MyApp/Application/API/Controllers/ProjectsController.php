@@ -1,20 +1,10 @@
 <?php
 namespace MyApp\Application\API\Controllers;
+
 use Doctrine\ORM\EntityManager;
 
 class ProjectsController extends \Controller {
-    /*
-      |--------------------------------------------------------------------------
-      | Default Home Controller
-      |--------------------------------------------------------------------------
-      |
-      | You may wish to use controllers instead of, or in addition to, Closure
-      | based routes. That's great! Here is an example controller method to
-      | get you started. To route to this controller, just add the route:
-      |
-      |	Route::get('/', 'HomeController@showWelcome');
-      |
-     */
+
 
     public function __construct(EntityManager $entity_manager)
     {
@@ -22,21 +12,31 @@ class ProjectsController extends \Controller {
         
     }
 
-    public function showWelcome()
-    {
-        return View::make('hello');
-
-    }
-
     public function index()
     {
         
-        $project = new \MyApp\Domain\Entities\Project();
-        $project->setName('VLN');
+        //just some example of using Doctrine entity manager
+        
+        //create a new project 
+        $project = new \MyApp\Domain\Entity\Project();
+        $project->setName('Megashop website build');
+        
+        //persist the new project
         $this->entity_manager->persist($project);
         $this->entity_manager->flush();
-        echo 'test';
-        exit;
+        
+        //get all the projects 
+        $projectRepository = $this->entity_manager->getRepository('MyApp\Domain\Entity\Project');
+        $projects = $projectRepository->findAll();
+        $hours_worked = array();
+        
+        foreach ($projects as $project) {
+            //because Project is an Entity Object encapsulating state and behaviour
+            //it is easy/obvious to add/call methods on the object, such as the one 
+            //below to calculate the total hours worked by full project team
+            $hours_worked[$project->getName()] =  $project->calculateTotalHoursWorked();
+        }
+        return \Response::json(json_encode($hours_worked));
 
     }
 

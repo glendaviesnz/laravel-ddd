@@ -1,0 +1,16 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="MyApp\Domain\Entity\TeamMember" table="team_members" repository-class="MyApp\Infrastructure\Repository\TeamMember">
+    <id name="id" type="integer" column="id">
+	<generator strategy="AUTO"/>
+        
+    </id>
+
+    <field name="first_name" column="first_name" type="string" length="50" nullable="true" unique="true" />
+    <field name="last_name" column="last_name" type="string" length="50" nullable="true" unique="true" />
+    
+    </entity>
+</doctrine-mapping>

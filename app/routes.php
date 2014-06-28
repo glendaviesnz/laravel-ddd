@@ -10,15 +10,11 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('test', 'HomeController@test');
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+
 /* 
  * Routes for API 
  */
-Route::group(array('prefix' => 'api/v1'), function() {
+Route::group(array('prefix' => 'api'), function() {
     
     Route::resource('/projects', 'MyApp\Application\API\Controllers\ProjectsController');
     

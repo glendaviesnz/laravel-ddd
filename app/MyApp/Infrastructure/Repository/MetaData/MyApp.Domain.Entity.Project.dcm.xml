@@ -3,7 +3,7 @@
 		  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="MyApp\Domain\Entities\Project" table="projects">
+    <entity name="MyApp\Domain\Entity\Project" table="projects" repository-class="MyApp\Infrastructure\Repository\Project">
     <id name="id" type="integer" column="id">
 	<generator strategy="AUTO"/>
         
@@ -11,5 +11,15 @@
 
     <field name="name" column="name" type="string" length="50" nullable="true" unique="true" />
     <field name="description" column="description" type="string" length="50" nullable="true" unique="true" />
+    <many-to-many field="project_team" target-entity="TeamMember">
+            <join-table name="projects_teammembers">
+                <join-columns>
+                    <join-column name="project_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="team_member_id" referenced-column-name="id"  />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 </doctrine-mapping>
