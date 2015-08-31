@@ -1,6 +1,8 @@
 laravel-ddd
 ===========
 
+N.B. I am not doing Laravel development currently, so this will not receive much love in the near future - but will leave it here for historical purposes ...
+
 A sandpit for playing around with DDD architecture options in Laravel 4.
 
 Gives a basic folder structure as a suggested approach, along with simple integration of Doctrine ORM. 
